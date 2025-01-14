@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name                  = 'ruby-hotfile'
-  spec.version               = '0.1.0'
+  spec.version               = '0.1.1'
   spec.summary               = 'Ruby HOTfile parser'
   spec.description           = 'Parser for IATA HOT files (accounting/sales data) as described in IATA BSP DISH.'
   spec.authors               = ['Ferry Landzaat']
