@@ -24,6 +24,7 @@ class Hotfile
     end
 
     def flight_schedule(flight_records)
+      return [] unless flight_records.respond_to?(:each)
       flight_records.map do |record|
         d = record[:data]
         {
@@ -38,6 +39,7 @@ class Hotfile
     end
 
     def passengers(passenger_records)
+      return [] unless passenger_records.respond_to?(:each)
       passenger_records.map do |record|
         full_name = record[:data][:name]
         surname, first_name = full_name.split('/')
@@ -61,7 +63,7 @@ class Hotfile
     end
 
     def find_pnr(records)
-      records.first&.dig(:data, :pnr)&.split('/')&.first
+      records&.first&.dig(:data, :pnr)&.split('/')&.first
     end
   end
 end
