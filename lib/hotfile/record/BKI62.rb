@@ -22,18 +22,24 @@ class Hotfile
             (.{51})
           /x).flatten
 
+        departure_time = departure_time.strip
+        departure_time = departure_time.insert(2, ':') if departure_time.length > 2
+        departure_datetime = DateTime.parse("#{Hotfile::Date.new(departure_date).to_date} #{departure_time}") if departure_date.strip.length > 0
+
+        arrival_time = arrival_time.strip
+        arrival_time = arrival_time.insert(2, ':') if arrival_time.length > 2
+        arrival_datetime = DateTime.parse("#{Hotfile::Date.new(arrival_date).to_date} #{arrival_time}") if arrival_date.strip.length > 0
+
         @data = {
           segment: segment.to_i,
           departure: {
             airport: departure_airport.strip,
-            datetime:
-              DateTime.parse("#{Hotfile::Date.new(departure_date).to_date} #{departure_time.strip.insert(2, ':')}"),
+            datetime: departure_datetime,
             terminal: departure_terminal.strip
           },
           arrival: {
             airport: arrival_airport.strip,
-            datetime:
-              DateTime.parse("#{Hotfile::Date.new(arrival_date).to_date} #{arrival_time.strip.insert(2, ':')}"),
+            datetime: arrival_datetime,
             terminal: arrival_terminal.strip
           },
           reserved: reserved.strip
