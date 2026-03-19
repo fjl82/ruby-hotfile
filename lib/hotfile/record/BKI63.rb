@@ -12,7 +12,7 @@ class Hotfile
             ff_ref, fare_class, change_of_gauge, equipment, reserved =
           line.scan(/
             (\d)
-            ([A-Z])
+            ([A-Z ])
             ([A-Z0-9 ]{5})
             ([A-Z0-9 ]{5})
             ([A-Z0-9 ]{5})
@@ -33,14 +33,14 @@ class Hotfile
             (.{4})
           /x).flatten
 
+        departure_datetime = DateTime.parse("#{Hotfile::Date.new(departure_date).to_date} #{departure_time.strip.insert(2, ':')}") if departure_date.strip.length > 0
         @data = {
           segment: segment.to_i,
           carrier: carrier.strip,
           flight_number: flight_number.strip,
           departure: {
             airport: departure_airport.strip,
-            datetime:
-              DateTime.parse("#{Hotfile::Date.new(departure_date).to_date} #{departure_time.strip.insert(2, ':')}")
+            datetime: departure_datetime
           },
           stopover: stopover.strip,
           arrival: {
