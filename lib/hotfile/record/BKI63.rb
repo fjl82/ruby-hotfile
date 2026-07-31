@@ -33,7 +33,7 @@ class Hotfile
             (.{4})
           /x).flatten
 
-        departure_datetime = DateTime.parse("#{Hotfile::Date.new(departure_date).to_date} #{departure_time.strip.insert(2, ':')}") if departure_date.strip.length > 0
+        departure_datetime = DateTime.parse("#{Hotfile::Date.new(departure_date).to_date} #{departure_time.strip.insert(2, ':') if departure_time.strip.length > 1}") if departure_date.strip.length > 0
         @data = {
           segment: segment.to_i,
           carrier: carrier.strip,
